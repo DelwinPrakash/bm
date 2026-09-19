@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meridian Trust Bank | Employee Log In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oxblood: #6D0808;
+    --umber: #2D0000;
+    --sage: #757D6F;
+    --parchment: #EEEAD7;
+
+    --page-bg: var(--parchment);
+    --page-text: var(--umber);
+    --page-muted: color-mix(in srgb, var(--umber) 72%, var(--parchment));
+    --field-bg: #F6F3E6;
+    --field-border: color-mix(in srgb, var(--sage) 75%, var(--parchment));
+    --accent: var(--oxblood);
+    --accent-hover: var(--umber);
+    --accent-text: var(--parchment);
+    --error: var(--oxblood);
+    --rule: color-mix(in srgb, var(--sage) 45%, var(--parchment));
+
+    --side-bg: var(--umber);
+    --side-text: var(--parchment);
+    --side-muted: color-mix(in srgb, var(--parchment) 74%, var(--umber));
+
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page-bg: var(--umber);
+      --page-text: var(--parchment);
+      --page-muted: color-mix(in srgb, var(--parchment) 74%, var(--umber));
+      --field-bg: #380303;
+      --field-border: color-mix(in srgb, var(--sage) 80%, var(--umber));
+      --accent: var(--parchment);
+      --accent-hover: #ffffff;
+      --accent-text: var(--umber);
+      --error: var(--parchment);
+      --rule: color-mix(in srgb, var(--sage) 50%, var(--umber));
+      --side-bg: var(--oxblood);
+    }
+  }
+  :root[data-theme="dark"] {
+    --page-bg: var(--umber);
+    --page-text: var(--parchment);
+    --page-muted: color-mix(in srgb, var(--parchment) 74%, var(--umber));
+    --field-bg: #380303;
+    --field-border: color-mix(in srgb, var(--sage) 80%, var(--umber));
+    --accent: var(--parchment);
+    --accent-hover: #ffffff;
+    --accent-text: var(--umber);
+    --error: var(--parchment);
+    --rule: color-mix(in srgb, var(--sage) 50%, var(--umber));
+    --side-bg: var(--oxblood);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    height: 100%;
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    background: var(--page-bg);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--page-bg);
+    color: var(--page-text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* ---------- Brand panel ---------- */
+  .brand {
+    position: relative;
+    overflow: hidden;
+    background: var(--side-bg);
+    color: var(--side-text);
+    padding: clamp(32px, 5vw, 64px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 48px;
+  }
+
+  .brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .brand-mark svg { flex: none; }
+  .brand-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+  .brand-name span {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--side-muted);
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+  }
+
+  .brand-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 30rem;
+  }
+  .brand-copy h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 3.4vw, 3.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+  }
+  .brand-copy p {
+    margin: 0;
+    color: var(--side-muted);
+    max-width: 26rem;
+    font-size: 0.9375rem;
+  }
+
+  .brand-foot {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    border-top: 1px solid color-mix(in srgb, var(--sage) 70%, transparent);
+    padding-top: 20px;
+    font-size: 0.8125rem;
+    color: var(--side-muted);
+  }
+
+  .arches {
+    position: absolute;
+    right: -12%;
+    bottom: -6%;
+    width: 92%;
+    max-width: 560px;
+    height: auto;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  /* ---------- Form panel ---------- */
+  .panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(32px, 6vw, 80px);
+  }
+
+  .panel-inner {
+    width: 100%;
+    max-width: 26rem;
+    margin: 0 auto;
+  }
+
+  .panel h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+  }
+  .panel .lede {
+    margin: 0 0 36px;
+    color: var(--page-muted);
+    font-size: 0.9375rem;
+    max-width: 24rem;
+  }
+
+  .field { margin-bottom: 24px; }
+
+  .field label,
+  .label-row label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .label-row a {
+    font-size: 0.8125rem;
+    color: var(--page-text);
+    text-underline-offset: 3px;
+    text-decoration-color: var(--sage);
+  }
+  .label-row a:hover { text-decoration-color: currentColor; }
+
+  .control {
+    position: relative;
+  }
+
+  .control input {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    font: inherit;
+    color: var(--page-text);
+    background: var(--field-bg);
+    border: 1px solid var(--field-border);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .control input::placeholder {
+    color: color-mix(in srgb, var(--page-text) 48%, var(--page-bg));
+  }
+  .control input:hover { border-color: var(--sage); }
+  .control input:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .control input[aria-invalid="true"] {
+    border-color: var(--error);
+    box-shadow: 0 0 0 1px var(--error);
+  }
+  .control.has-toggle input { padding-right: 76px; }
+
+  .toggle {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    height: 40px;
+    padding: 0 12px;
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--page-text);
+    background: transparent;
+    border: 0;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .toggle:hover { background: color-mix(in srgb, var(--sage) 22%, transparent); }
+  .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .error {
+    min-height: 0;
+    margin: 8px 0 0;
+    font-size: 0.8125rem;
+    color: var(--error);
+    display: none;
+  }
+  .error.is-visible { display: block; }
+
+  .submit {
+    width: 100%;
+    height: 54px;
+    margin-top: 8px;
+    font: inherit;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    color: var(--accent-text);
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+  }
+  .submit:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .submit:focus-visible { outline: 2px solid var(--page-text); outline-offset: 3px; }
+  .submit[disabled] { cursor: progress; opacity: 0.85; }
+
+  .panel-note {
+    margin: 32px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8125rem;
+    color: var(--page-muted);
+  }
+
+  /* ---------- Dialog ---------- */
+  dialog {
+    width: min(92vw, 26rem);
+    padding: 0;
+    border: 0;
+    border-radius: 2px;
+    background: var(--parchment);
+    color: var(--umber);
+    box-shadow: 0 24px 60px rgba(45, 0, 0, 0.45);
+  }
+  dialog::backdrop { background: rgba(45, 0, 0, 0.62); }
+  dialog[open] { animation: rise 0.22s ease-out; }
+
+  .dialog-band {
+    height: 6px;
+    background: var(--oxblood);
+  }
+  .dialog-body { padding: 36px 32px 28px; }
+
+  .tick {
+    width: 56px;
+    height: 56px;
+    display: block;
+    margin-bottom: 24px;
+  }
+  .tick circle { fill: var(--oxblood); }
+  .tick path {
+    fill: none;
+    stroke: var(--parchment);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 34;
+    stroke-dashoffset: 34;
+  }
+  dialog[open] .tick path { animation: draw 0.4s 0.15s ease-out forwards; }
+
+  dialog h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.75rem;
+    line-height: 1.15;
+    margin: 0 0 10px;
+  }
+  dialog p {
+    margin: 0 0 28px;
+    font-size: 0.9375rem;
+    color: color-mix(in srgb, var(--umber) 78%, var(--parchment));
+  }
+  dialog p strong { color: var(--umber); font-weight: 600; }
+
+  .dialog-actions { display: flex; }
+  .dialog-actions button {
+    flex: 1;
+    height: 50px;
+    font: inherit;
+    font-weight: 500;
+    color: var(--parchment);
+    background: var(--oxblood);
+    border: 1px solid var(--oxblood);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.18s ease;
+  }
+  .dialog-actions button:hover { background: var(--umber); border-color: var(--umber); }
+  .dialog-actions button:focus-visible { outline: 2px solid var(--umber); outline-offset: 3px; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog[open] { animation: none; }
+    dialog[open] .tick path { animation: none; stroke-dashoffset: 0; }
+    * { transition: none !important; }
+  }
+
+  /* ---------- Small screens ---------- */
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; min-height: 0; }
+    .brand { padding: 28px 24px; gap: 0; }
+    .brand-copy, .brand-foot, .arches { display: none; }
+    .panel { padding: 40px 24px 48px; justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+  <div class="layout">
+
+    <aside class="brand">
+      <div class="brand-mark">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="42" height="42" stroke="#EEEAD7" stroke-width="1.5"/>
+          <path d="M22 9 L35 17 H9 Z" stroke="#EEEAD7" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M13 21 V31 M22 21 V31 M31 21 V31" stroke="#EEEAD7" stroke-width="1.5"/>
+          <path d="M9 35 H35" stroke="#EEEAD7" stroke-width="1.5"/>
+        </svg>
+        <div class="brand-name">Meridian Trust
+          <span>Staff Portal</span>
+        </div>
+      </div>
+
+      <div class="brand-copy">
+        <h2>Secure access for the people who keep the bank running.</h2>
+        <p>Use your employee credentials to reach customer accounts, branch operations and internal reporting.</p>
+      </div>
+
+      <div class="brand-foot">
+        <span>Authorized employees only</span>
+        <span>Activity on this system is monitored</span>
+      </div>
+
+      <svg class="arches" viewBox="0 0 560 420" fill="none" aria-hidden="true">
+        <g stroke="#757D6F" stroke-width="1.25">
+          <path d="M40 420 V220 A240 240 0 0 1 520 220 V420"/>
+          <path d="M90 420 V226 A190 190 0 0 1 470 226 V420"/>
+          <path d="M140 420 V232 A140 140 0 0 1 420 232 V420"/>
+          <path d="M190 420 V238 A90 90 0 0 1 370 238 V420"/>
+          <path d="M240 420 V244 A40 40 0 0 1 320 244 V420"/>
+        </g>
+      </svg>
+    </aside>
+
+    <main class="panel">
+      <div class="panel-inner">
+        <h1>Log in</h1>
+        <p class="lede">Enter your employee ID and password to open the staff portal.</p>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="employeeId">Employee ID</label>
+            <div class="control">
+              <input type="text" id="employeeId" name="employeeId" autocomplete="username" inputmode="text" placeholder="For example, MT-104827" aria-describedby="idError" spellcheck="false" autocapitalize="characters">
+            </div>
+            <p class="error" id="idError" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="password">Password</label>
+              <a href="#" id="forgot">Forgot password?</a>
+            </div>
+            <div class="control has-toggle">
+              <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Enter your password" aria-describedby="pwError">
+              <button type="button" class="toggle" id="toggle" aria-pressed="false" aria-controls="password">Show</button>
+            </div>
+            <p class="error" id="pwError" role="alert"></p>
+          </div>
+
+          <button type="submit" class="submit" id="submitBtn">Log in</button>
+        </form>
+
+        <p class="panel-note">Having trouble logging in? Contact the IT Service Desk on extension 4400. Never share your password with anyone, including IT staff.</p>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="successDialog" aria-labelledby="dlgTitle" aria-describedby="dlgText">
+    <div class="dialog-band"></div>
+    <div class="dialog-body">
+      <svg class="tick" viewBox="0 0 56 56" aria-hidden="true">
+        <circle cx="28" cy="28" r="28"/>
+        <path d="M17 29 L25 37 L40 20"/>
+      </svg>
+      <h3 id="dlgTitle">Login successful</h3>
+      <p id="dlgText">Employee ID <strong id="dlgId"></strong> has been verified. You now have access to the staff portal.</p>
+      <div class="dialog-actions">
+        <button type="button" id="dlgClose">Continue</button>
+      </div>
+    </div>
+  </dialog>
+
+<script>
+  (function () {
+    var form = document.getElementById('loginForm');
+    var idInput = document.getElementById('employeeId');
+    var pwInput = document.getElementById('password');
+    var idError = document.getElementById('idError');
+    var pwError = document.getElementById('pwError');
+    var toggle = document.getElementById('toggle');
+    var submitBtn = document.getElementById('submitBtn');
+    var dialog = document.getElementById('successDialog');
+    var dlgId = document.getElementById('dlgId');
+    var dlgClose = document.getElementById('dlgClose');
+
+    function setError(input, el, message) {
+      if (message) {
+        el.textContent = message;
+        el.classList.add('is-visible');
+        input.setAttribute('aria-invalid', 'true');
+      } else {
+        el.textContent = '';
+        el.classList.remove('is-visible');
+        input.removeAttribute('aria-invalid');
+      }
+    }
+
+    function validate() {
+      var id = idInput.value.trim();
+      var pw = pwInput.value;
+      var ok = true;
+      var first = null;
+
+      if (!id) {
+        setError(idInput, idError, 'Enter your employee ID.');
+        ok = false; first = first || idInput;
+      } else if (!/^[A-Za-z0-9\-]{4,20}$/.test(id)) {
+        setError(idInput, idError, 'Employee ID must be 4 to 20 letters, numbers or hyphens.');
+        ok = false; first = first || idInput;
+      } else {
+        setError(idInput, idError, '');
+      }
+
+      if (!pw) {
+        setError(pwInput, pwError, 'Enter your password.');
+        ok = false; first = first || pwInput;
+      } else if (pw.length < 6) {
+        setError(pwInput, pwError, 'Password must be at least 6 characters.');
+        ok = false; first = first || pwInput;
+      } else {
+        setError(pwInput, pwError, '');
+      }
+
+      if (first) first.focus();
+      return ok;
+    }
+
+    idInput.addEventListener('input', function () { if (idInput.getAttribute('aria-invalid')) setError(idInput, idError, ''); });
+    pwInput.addEventListener('input', function () { if (pwInput.getAttribute('aria-invalid')) setError(pwInput, pwError, ''); });
+
+    toggle.addEventListener('click', function () {
+      var show = pwInput.type === 'password';
+      pwInput.type = show ? 'text' : 'password';
+      toggle.textContent = show ? 'Hide' : 'Show';
+      toggle.setAttribute('aria-pressed', String(show));
+    });
+
+    document.getElementById('forgot').addEventListener('click', function (e) { e.preventDefault(); });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (submitBtn.disabled || !validate()) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Verifying credentials';
+
+      // Simulated verification delay. Replace with a real authentication request.
+      setTimeout(function () {
+        dlgId.textContent = idInput.value.trim().toUpperCase();
+        dialog.showModal();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Log in';
+      }, 700);
+    });
+
+    dialog.addEventListener('close', function () {
+      form.reset();
+      pwInput.type = 'password';
+      toggle.textContent = 'Show';
+      toggle.setAttribute('aria-pressed', 'false');
+      idInput.focus();
+    });
+
+    dlgClose.addEventListener('click', function () { dialog.close(); });
+  })();
+</script>
+</body>
+</html>
