@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>SANDMS Bank | Employee Log In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="brand">
+        <div class="brand-mark">
+          <svg
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            aria-hidden="true"
+          >
+            <rect
+              x="1"
+              y="1"
+              width="42"
+              height="42"
+              stroke="#EEEAD7"
+              stroke-width="1.5"
+            />
+            <path
+              d="M22 9 L35 17 H9 Z"
+              stroke="#EEEAD7"
+              stroke-width="1.5"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M13 21 V31 M22 21 V31 M31 21 V31"
+              stroke="#EEEAD7"
+              stroke-width="1.5"
+            />
+            <path d="M9 35 H35" stroke="#EEEAD7" stroke-width="1.5" />
+          </svg>
+          <div class="brand-name">
+            SANDMS Bank
+            <span
+              >Secure &amp; Advanced Network for Digital Money Services</span
+            >
+          </div>
+        </div>
+
+        <div class="brand-copy">
+          <h2>Secure access for the people who keep the bank running.</h2>
+          <p>
+            Use your employee credentials to reach customer accounts, branch
+            operations and internal reporting.
+          </p>
+        </div>
+
+        <div class="brand-foot">
+          <span>Authorized employees only</span>
+          <span>Activity on this system is monitored</span>
+        </div>
+
+        <svg
+          class="arches"
+          viewBox="0 0 560 420"
+          fill="none"
+          aria-hidden="true"
+        >
+          <g stroke="#757D6F" stroke-width="1.25">
+            <path d="M40 420 V220 A240 240 0 0 1 520 220 V420" />
+            <path d="M90 420 V226 A190 190 0 0 1 470 226 V420" />
+            <path d="M140 420 V232 A140 140 0 0 1 420 232 V420" />
+            <path d="M190 420 V238 A90 90 0 0 1 370 238 V420" />
+            <path d="M240 420 V244 A40 40 0 0 1 320 244 V420" />
+          </g>
+        </svg>
+      </aside>
+
+      <main class="panel">
+        <div class="panel-inner">
+          <h1>Log in</h1>
+          <p class="lede">
+            Enter your employee ID and password to open the staff portal.
+          </p>
+
+          <form id="loginForm" novalidate>
+            <div class="field">
+              <label for="employeeId">Employee ID</label>
+              <div class="control">
+                <input
+                  type="text"
+                  id="employeeId"
+                  name="employeeId"
+                  autocomplete="username"
+                  inputmode="text"
+                  placeholder="For example, SB-104827"
+                  aria-describedby="idError"
+                  spellcheck="false"
+                  autocapitalize="characters"
+                />
+              </div>
+              <p class="error" id="idError" role="alert"></p>
+            </div>
+
+            <div class="field">
+              <div class="label-row">
+                <label for="password">Password</label>
+                <a href="#" id="forgot">Forgot password?</a>
+              </div>
+              <div class="control has-toggle">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  autocomplete="current-password"
+                  placeholder="Enter your password"
+                  aria-describedby="pwError"
+                />
+                <button
+                  type="button"
+                  class="toggle"
+                  id="toggle"
+                  aria-pressed="false"
+                  aria-controls="password"
+                >
+                  Show
+                </button>
+              </div>
+              <p class="error" id="pwError" role="alert"></p>
+            </div>
+
+            <button type="submit" class="submit" id="submitBtn">Log in</button>
+          </form>
+
+          <p class="panel-note">
+            Never share your password with anyone, including IT staff.
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <dialog
+      id="successDialog"
+      aria-labelledby="dlgTitle"
+      aria-describedby="dlgText"
+    >
+      <div class="dialog-band"></div>
+      <div class="dialog-body">
+        <svg class="tick" viewBox="0 0 56 56" aria-hidden="true">
+          <circle cx="28" cy="28" r="28" />
+          <path d="M17 29 L25 37 L40 20" />
+        </svg>
+        <h3 id="dlgTitle">Login successful</h3>
+        <p id="dlgText">
+          Employee ID <strong id="dlgId"></strong> has been verified. You now
+          have access to the staff portal.
+        </p>
+        <div class="dialog-actions">
+          <button type="button" id="dlgClose">Continue</button>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>

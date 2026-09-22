@@ -1,0 +1,491 @@
+:root {
+  --oxblood: #6d0808;
+  --umber: #2d0000;
+  --sage: #757d6f;
+  --parchment: #eeead7;
+
+  --page-bg: #eeead7;
+  --page-text: var(--umber);
+  --page-muted: color-mix(in srgb, var(--umber) 72%, var(--parchment));
+  --field-bg: #f6f3e6;
+  --field-border: color-mix(in srgb, var(--sage) 75%, var(--parchment));
+  --accent: var(--oxblood);
+  --accent-hover: var(--umber);
+  --accent-text: var(--parchment);
+  --error: var(--oxblood);
+  --rule: color-mix(in srgb, var(--sage) 45%, var(--parchment));
+
+  --side-bg: var(--oxblood);
+  --side-text: var(--parchment);
+  --side-muted: color-mix(in srgb, var(--parchment) 82%, var(--oxblood));
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans:
+    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  background: var(--page-bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--page-bg);
+  color: var(--page-text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.brand {
+  position: relative;
+  overflow: hidden;
+  background: var(--side-bg);
+  color: var(--side-text);
+  padding: clamp(32px, 5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+.brand-mark svg {
+  flex: none;
+}
+.brand-name {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+.brand-name span {
+  display: block;
+  line-height: 1.4;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--side-muted);
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+}
+
+.brand-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 30rem;
+}
+.brand-copy h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 3.4vw, 3.1rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+}
+.brand-copy p {
+  margin: 0;
+  color: var(--side-muted);
+  max-width: 26rem;
+  font-size: 0.9375rem;
+}
+
+.brand-foot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  border-top: 1px solid color-mix(in srgb, var(--sage) 70%, transparent);
+  padding-top: 20px;
+  font-size: 0.8125rem;
+  color: var(--side-muted);
+}
+
+.arches {
+  position: absolute;
+  right: -12%;
+  bottom: -6%;
+  width: 92%;
+  max-width: 560px;
+  height: auto;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 6vw, 80px);
+}
+
+.panel-inner {
+  width: 100%;
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+.panel h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+.panel .lede {
+  margin: 0 0 36px;
+  color: var(--page-muted);
+  font-size: 0.9375rem;
+  max-width: 24rem;
+}
+
+.field {
+  margin-bottom: 24px;
+}
+
+.field label,
+.label-row label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.label-row a {
+  font-size: 0.8125rem;
+  color: var(--page-text);
+  text-underline-offset: 3px;
+  text-decoration-color: var(--sage);
+}
+.label-row a:hover {
+  text-decoration-color: currentColor;
+}
+
+.control {
+  position: relative;
+}
+
+.control input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  font: inherit;
+  color: var(--page-text);
+  background: var(--field-bg);
+  border: 1px solid var(--field-border);
+  border-radius: 2px;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.control input::placeholder {
+  color: color-mix(in srgb, var(--page-text) 48%, var(--page-bg));
+}
+.control input:hover {
+  border-color: var(--sage);
+}
+.control input:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.control input[aria-invalid="true"] {
+  border-color: var(--error);
+  box-shadow: 0 0 0 1px var(--error);
+}
+.control.has-toggle input {
+  padding-right: 76px;
+}
+
+.toggle {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  height: 40px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--page-text);
+  background: transparent;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.toggle:hover {
+  background: color-mix(in srgb, var(--sage) 22%, transparent);
+}
+.toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.error {
+  min-height: 0;
+  margin: 8px 0 0;
+  font-size: 0.8125rem;
+  color: var(--error);
+  display: none;
+}
+.error.is-visible {
+  display: block;
+}
+
+.submit {
+  width: 100%;
+  height: 54px;
+  margin-top: 8px;
+  font: inherit;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+}
+.submit:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+.submit:focus-visible {
+  outline: 2px solid var(--page-text);
+  outline-offset: 3px;
+}
+.submit[disabled] {
+  cursor: progress;
+  opacity: 0.85;
+}
+
+.panel-note {
+  margin: 32px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--page-muted);
+}
+.panel-note a {
+  color: var(--page-text);
+  font-weight: 500;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--sage);
+}
+.panel-note a:hover {
+  text-decoration-color: currentColor;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -4px 0 28px;
+  font-size: 0.875rem;
+  color: var(--page-text);
+}
+.remember input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid var(--field-border);
+  border-radius: 2px;
+  background: var(--field-bg);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+.remember input[type="checkbox"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  transform: scale(0);
+  background: var(--accent);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 45% 62%);
+  transition: transform 0.1s ease-in-out;
+}
+.remember input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+.remember input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.remember label {
+  cursor: pointer;
+}
+
+dialog {
+  width: min(92vw, 26rem);
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--parchment);
+  color: var(--umber);
+  box-shadow: 0 24px 60px rgba(45, 0, 0, 0.45);
+}
+dialog::backdrop {
+  background: rgba(45, 0, 0, 0.62);
+}
+dialog[open] {
+  animation: rise 0.22s ease-out;
+}
+
+.dialog-band {
+  height: 6px;
+  background: var(--oxblood);
+}
+.dialog-body {
+  padding: 36px 32px 28px;
+}
+
+.tick {
+  width: 56px;
+  height: 56px;
+  display: block;
+  margin-bottom: 24px;
+}
+.tick circle {
+  fill: var(--oxblood);
+}
+.tick path {
+  fill: none;
+  stroke: var(--parchment);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 34;
+  stroke-dashoffset: 34;
+}
+dialog[open] .tick path {
+  animation: draw 0.4s 0.15s ease-out forwards;
+}
+
+dialog h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1.15;
+  margin: 0 0 10px;
+}
+dialog p {
+  margin: 0 0 28px;
+  font-size: 0.9375rem;
+  color: color-mix(in srgb, var(--umber) 78%, var(--parchment));
+}
+dialog p strong {
+  color: var(--umber);
+  font-weight: 600;
+}
+
+.dialog-actions {
+  display: flex;
+}
+.dialog-actions button {
+  flex: 1;
+  height: 50px;
+  font: inherit;
+  font-weight: 500;
+  color: var(--parchment);
+  background: var(--oxblood);
+  border: 1px solid var(--oxblood);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+.dialog-actions button:hover {
+  background: var(--umber);
+  border-color: var(--umber);
+}
+.dialog-actions button:focus-visible {
+  outline: 2px solid var(--umber);
+  outline-offset: 3px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  dialog[open] {
+    animation: none;
+  }
+  dialog[open] .tick path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .brand {
+    padding: 28px 24px;
+    gap: 0;
+  }
+  .brand-copy,
+  .brand-foot,
+  .arches {
+    display: none;
+  }
+  .panel {
+    padding: 40px 24px 48px;
+    justify-content: flex-start;
+  }
+}
