@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Meridian Trust Bank | Employee Log In</title>
+<title>SANDMS Bank | Employee Log In</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     --sage: #757D6F;
     --parchment: #EEEAD7;
 
-    --page-bg: var(--parchment);
+    --page-bg: #EEEAD7;
     --page-text: var(--umber);
     --page-muted: color-mix(in srgb, var(--umber) 72%, var(--parchment));
     --field-bg: #F6F3E6;
@@ -25,9 +25,9 @@
     --error: var(--oxblood);
     --rule: color-mix(in srgb, var(--sage) 45%, var(--parchment));
 
-    --side-bg: var(--umber);
+    --side-bg: var(--oxblood);
     --side-text: var(--parchment);
-    --side-muted: color-mix(in srgb, var(--parchment) 74%, var(--umber));
+    --side-muted: color-mix(in srgb, var(--parchment) 82%, var(--oxblood));
 
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -35,35 +35,6 @@
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --page-bg: var(--umber);
-      --page-text: var(--parchment);
-      --page-muted: color-mix(in srgb, var(--parchment) 74%, var(--umber));
-      --field-bg: #380303;
-      --field-border: color-mix(in srgb, var(--sage) 80%, var(--umber));
-      --accent: var(--parchment);
-      --accent-hover: #ffffff;
-      --accent-text: var(--umber);
-      --error: var(--parchment);
-      --rule: color-mix(in srgb, var(--sage) 50%, var(--umber));
-      --side-bg: var(--oxblood);
-    }
-  }
-  :root[data-theme="dark"] {
-    --page-bg: var(--umber);
-    --page-text: var(--parchment);
-    --page-muted: color-mix(in srgb, var(--parchment) 74%, var(--umber));
-    --field-bg: #380303;
-    --field-border: color-mix(in srgb, var(--sage) 80%, var(--umber));
-    --accent: var(--parchment);
-    --accent-hover: #ffffff;
-    --accent-text: var(--umber);
-    --error: var(--parchment);
-    --rule: color-mix(in srgb, var(--sage) 50%, var(--umber));
-    --side-bg: var(--oxblood);
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -122,6 +93,7 @@
   }
   .brand-name span {
     display: block;
+    line-height: 1.4;
     font-family: var(--sans);
     font-size: 0.8125rem;
     font-weight: 400;
@@ -170,7 +142,7 @@
     width: 92%;
     max-width: 560px;
     height: auto;
-    opacity: 0.55;
+    opacity: 0.8;
     pointer-events: none;
   }
 
@@ -409,8 +381,8 @@
           <path d="M13 21 V31 M22 21 V31 M31 21 V31" stroke="#EEEAD7" stroke-width="1.5"/>
           <path d="M9 35 H35" stroke="#EEEAD7" stroke-width="1.5"/>
         </svg>
-        <div class="brand-name">Meridian Trust
-          <span>Staff Portal</span>
+        <div class="brand-name">SANDMS Bank
+          <span>Secure &amp; Advanced Network for Digital Money Services</span>
         </div>
       </div>
 
@@ -444,7 +416,7 @@
           <div class="field">
             <label for="employeeId">Employee ID</label>
             <div class="control">
-              <input type="text" id="employeeId" name="employeeId" autocomplete="username" inputmode="text" placeholder="For example, MT-104827" aria-describedby="idError" spellcheck="false" autocapitalize="characters">
+              <input type="text" id="employeeId" name="employeeId" autocomplete="username" inputmode="text" placeholder="For example, SB-104827" aria-describedby="idError" spellcheck="false" autocapitalize="characters">
             </div>
             <p class="error" id="idError" role="alert"></p>
           </div>
